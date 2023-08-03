@@ -14,18 +14,27 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
-# set timeout of urllib.request.retrive
+#############################################
+### Set timeout of urllib.request.retrive ###
+#############################################
 import socket
 socket.setdefaulttimeout(4)
 
-# ssl 인증 오류 해결용
+#######################################################
+### This codes for ssl authorization error handling ###
+#######################################################
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
-# directory info
+######################
+### Directory info ###
+######################
 current_parent_dir = os.getcwd()
 
-# parsing
+#################
+### Arguments ###
+#################
+# args parsing
 def parsing():
     parser = argparse.ArgumentParser()
     parser.add_argument('--labels', nargs='+', type=str, help='class names')
@@ -58,7 +67,10 @@ def name_parsing(names):
     print(name_list)
     return name_list
 
-# 검색어 저장할 텍스트 파일 있는지 확인하고 만들기
+#################################
+### Check keywords input file ###
+#################################
+# If there is no input file, then create the default keywords input files.
 def createWordsFile(names : list):
     for name in names:
         file_name = current_parent_dir + '\\search_words\\' + name + '.txt'
@@ -74,7 +86,10 @@ def createWordsFile(names : list):
         except OSError:
             print("Error: Failed to create the word file :" + name)
 
-# 검색어 DataFrame 만들기
+################################
+### Create keyords dataframe ###
+################################
+# Read the input text file and add row of the label into dataframe
 def readWords(names : list):
     cols = ['name', 'words']
     values = []
@@ -103,6 +118,9 @@ def readWords(names : list):
     df_words = pd.DataFrame(values, columns=cols)
     return df_words
 
+######################
+###### Crawling ######
+######################
 # send download request
 def send_request(img_src, folder_name, name, cnt):
     print("\nrequest sent : ", img_src[:10], "..", img_src[-10:], "(", cnt, ")")
@@ -120,7 +138,7 @@ def send_request(img_src, folder_name, name, cnt):
 
 # crawling
 def crawling(name : str, keywords : list, max_cnt : int = 100):
-    # 이미지 저장할 폴더 만들기
+    # Create folder to store images of the class.
     folder_name = current_parent_dir + '\\images\\' + name
     try:
         if not os.path.exists(folder_name):
@@ -130,7 +148,7 @@ def crawling(name : str, keywords : list, max_cnt : int = 100):
     except OSError:
         print("Error: Failed to create the folder" + name)
     
-    # 중복 다운로드 방지용 src list 저장
+    # Create or get source list for preventing duplicate images from being collected.
     src_list_txt_name = folder_name + '\\' + name + '_src list.txt'
     
     cnt = 0
@@ -141,14 +159,16 @@ def crawling(name : str, keywords : list, max_cnt : int = 100):
         if not os.path.exists(current_parent_dir + '\\chromedriver.exe'):
             print('Error: Chromedriver need to installed.')
             return
-        driver = webdriver.Chrome() # 상대주소에 크롬 드라이버 있어야됨.
-        driver.get("https://www.google.co.kr/imghp") # 구글 이미지 검색 url
-        search_bar = driver.find_element(By.NAME, "q") #구글 검색창 선택
-        search_bar.send_keys(keyword) # 검색창에 검색할 내용(name)넣기
-        search_bar.send_keys(Keys.RETURN) # 검색할 내용을 넣고 enter를 치는것!
-        time.sleep(load_time) # 웹페이지 기다려야 되서 넣음
+        driver = webdriver.Chrome() # Caution!: in the main dir, chrome driver have to be located.
+        driver.get("https://www.google.co.kr/imghp") # Google image search url.
+        search_bar = driver.find_element(By.NAME, "q") # Select the search bar.
+        search_bar.send_keys(keyword) # Put the keyword in the search bar.
+        search_bar.send_keys(Keys.RETURN) # Click 'return' button.
+        time.sleep(load_time) # Wait for loading the result page.
         
-        # 이미지 개수 채울 때까지 스크롤링
+        # Scrolling
+        # It is stopped if the number of loaded images is greater or equal than the maximum number
+        # or meet the end of page.
         last_hegiht = driver.execute_script("return document.body.scrollHeight")
         imgs = []
         while True :
@@ -159,7 +179,7 @@ def crawling(name : str, keywords : list, max_cnt : int = 100):
                 last_hegiht = new_height
                 continue
             else :
-                imgs = driver.find_elements(By.CSS_SELECTOR, ".rg_i.Q4LuWd") #작게 뜬 이미지들 모두 선택(elements)
+                imgs = driver.find_elements(By.CSS_SELECTOR, ".rg_i.Q4LuWd") # Select all small images.
                 print('Scrolling.. Find ' + str(len(imgs)) + ' images of ' + name)
                 if len(imgs) > max_cnt * 2:
                     print('Find' + str(len(imgs)) + 'images of' + name)
@@ -167,27 +187,30 @@ def crawling(name : str, keywords : list, max_cnt : int = 100):
                 try:
                     time.sleep(load_time + 2)
                     # 2023.07.04 Update
-                    # 더보기 버튼 CSS SELECTOR 접미사가 바뀜
-                    # driver.find_element(By.CSS_SELECTOR, ".mye4qd").click()
+                    # The suffix of CSS SELECTOR of 'more' button is updated.
+                    # previous: driver.find_element(By.CSS_SELECTOR, ".mye4qd").click()
                     driver.find_element(By.CSS_SELECTOR, ".LZ4I").click()
                 except:
                     break
         
-        # 탐지 오류 관련해서 wait하고 다시 img load
+        # Redetect all small images.
         time.sleep(load_time)
         imgs = driver.find_elements(By.CSS_SELECTOR, ".rg_i.Q4LuWd") #작게 뜬 이미지들 모두 선택(elements)
         print('Finally, Find  ' + str(len(imgs)) + '  images of  ' + keyword)
+
+        # Download images
         for img in imgs:
             try:
                 img.click()
-                # bot detect 방지
+                # Prevent websites consider the crawler as bot.
+                # For this, change the wait time randomly.
                 print('image click successes..', end = '')
                 load_rand_time = random.uniform(1.5, 4)
                 time.sleep(load_rand_time)
                 # 2023.07.04 Update
-                # XPATH Path가 바뀜 => rg_i.Q4LuWd로 찾은 element에서 직접 src 추출
-                # img_elem = driver.find_element(By.XPATH,
-                #                '//*[@id="Sva75c"]/div[2]/div/div[2]/div[2]/div[2]/c-wiz/div/div/div/div[3]/div[1]/a/img[1]')
+                # XPATH of the source url is updated.
+                # So, get the source url from the elements of small image.
+                # previous: img_elem = driver.find_element(By.XPATH, '//*[@id="Sva75c"]/div[2]/div/div[2]/div[2]/div[2]/c-wiz/div/div/div/div[3]/div[1]/a/img[1]')
                 img_elem = img
                 img_src = img_elem.get_attribute('src')
                 print('\nFinding source successes..\nStart overlapping check..')
@@ -196,7 +219,7 @@ def crawling(name : str, keywords : list, max_cnt : int = 100):
                 print('File loading fails.')
                 continue
             
-            # 중복되는 이미지인지 src url로 대조
+            # Check whether the image was collected.
             isOverlapped = False
             if os.path.exists(src_list_txt_name):
                 file = open(src_list_txt_name, 'r')
@@ -216,12 +239,12 @@ def crawling(name : str, keywords : list, max_cnt : int = 100):
             else:
                 print('This img is bandnew..', end = '')
             
-            # download request
+            # Send request to download the image.
             send_request(img_src, folder_name, name, cnt)
             
-            # download 성공시
+            # If the download is succes.
             if os.path.exists(folder_name + '\\' + name + str(cnt) + '.jpg'): 
-                # src_list_txt에 src url 저장
+                # Store source url in source url list file.
                 isFirstWriting = False
                 if not os.path.exists(src_list_txt_name):
                     isFirstWriting = True
