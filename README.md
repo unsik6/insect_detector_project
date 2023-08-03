@@ -7,7 +7,7 @@
   - \<preparing\> 1) get the input file for classes. 2) create or get the input files as diverse extensions.
 
 ## [ 02 ] <a href = "https://github.com/unsik6/insect_detector_project/blob/main/pseudo_labeler.py">Pseudo-Labeler</a>
-&nbsp;&nbsp;Pseudo-labeler is labeling the raw images using pre-trained yolov5 model. This pseudo-labeler make the working time  more less. You can specify whether the keywords given by argument is crawled by crawler. And, run <i>detect.py</i> of pre-trained yolov5 (also given by argument) with source images, which crawled by embedded-crawler or just given.
+&nbsp;&nbsp;Pseudo-labeler is labeling the raw images using pre-trained yolov5 model. This pseudo-labeler make the working time more less. You can specify whether the keywords given by argument is crawled by crawler. And, run <i>detect.py</i> of pre-trained yolov5 (also given by argument) with source images, which crawled by embedded-crawler or just given.
 
 ### How to use
 ```bash
