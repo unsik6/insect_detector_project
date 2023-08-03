@@ -9,7 +9,6 @@
 ## [ 02 ] <a href = "https://github.com/unsik6/insect_detector_project/blob/main/pseudo_labeler.py">Pseudo-Labeler</a>
 &nbsp;&nbsp;Pseudo-labeler is labeling the raw images using pre-trained yolov5 model. This pseudo-labeler make the working time more less. You can specify whether the keywords given by argument is crawled by crawler. And, run <i>detect.py</i> of pre-trained yolov5 (also given by argument) with source images, which crawled by embedded-crawler or just given.
 
-### How to use
 ```bash
 python psedo_labeler.py --images-path [images path] --labeler [yolov5 parent dir] --labels [names of labels] --index [starte index] --conf [confidence threshold] --num [maximum number of crawling each images] (--crawl)
 ```
