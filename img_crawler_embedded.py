@@ -58,10 +58,10 @@ def name_parsing(names):
             label_file.close()
         else:
             print('Error: No labels file directories')
-            return -1
+            exit(1)
     elif len(names) < 1:
         print('Error: No label')
-        return -1
+        exit(1)
     else:
         name_list = names
     print('Name list is successfully parsed : ', end = '')
@@ -198,7 +198,7 @@ def crawling(name : str, keywords : list, max_cnt : int = 100):
         
         # Redetect all small images.
         time.sleep(load_time)
-        imgs = driver.find_elements(By.CSS_SELECTOR, ".rg_i.Q4LuWd") #작게 뜬 이미지들 모두 선택(elements)
+        imgs = driver.find_elements(By.CSS_SELECTOR, ".rg_i.Q4LuWd") # Select all small images(elements).
         print('Finally, Find  ' + str(len(imgs)) + '  images of  ' + keyword)
 
         # Download images
@@ -281,9 +281,8 @@ def crawling(name : str, keywords : list, max_cnt : int = 100):
 def main(pars):
     name_list = pars.labels
     name_list = name_parsing(name_list)
-    if name_list == -1:
-        return 0
-    createWordsFile(name_list)
+    keyword_list = pars.keywords
+    createWordsFile(name_list, keyword_list)
     df_keywords = readWords(name_list)
     
     max_cnt = pars.num
