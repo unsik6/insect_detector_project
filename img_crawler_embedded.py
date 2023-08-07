@@ -78,11 +78,12 @@ def createWordsFile(names : list, keywords : list):
         try:
             if not os.path.exists(file_name):
                 file = open(file_name, 'w')
+                word = '"' + name + '"'
                 if keywords == None:
-                    file.write(name)
+                    file.write(word)
                 else:
                     for keywords in keywords:
-                        file.write(name + ' ' + keywords, '\t')
+                        file.write(word + ' ' + keywords, '\t')
                 file.close()
                 print('Create:' + file_name)
             else: print("Exception: There is same file :" + name)
