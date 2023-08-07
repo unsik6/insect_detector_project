@@ -43,6 +43,8 @@ def name_parsing(names):
                 if not line: break
                 name_list.append(line)
             label_file.close()
+            global isLabel_Txt
+            isLabel_Txt = True
         else:
             print('Error: No labels file directories.')
             exit(0)
@@ -112,8 +114,11 @@ def main(pars):
     if pars.crawl == True:
         # create cmd line
         cmd = 'python img_crawler_embedded.py --labels'
-        for names in name_list:
-            cmd += ' ' + names
+        if isLabel_Txt:
+            cmd += ' ' + pars.labels[0]
+        else:
+            for names in name_list:
+                cmd += ' ' + names
         cmd += ' --num ' + str(pars.num)
         if pars.keywords != None:
             cmd += ' --keywords'

@@ -37,7 +37,7 @@ current_parent_dir = os.getcwd()
 # args parsing
 def parsing():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--labels', nargs='+', type=str, help='class names')
+    parser.add_argument('--labels', nargs='+', type=str, help='class names or txt file')
     parser.add_argument('--num', type=int, help='the maximum number of collected image of each label')
     parser.add_argument('--keywords', nargs='+', type=str, help='keywords combined with class name; "class name + keyword" will be searched.')
     pars = parser.parse_args()
@@ -49,12 +49,11 @@ def name_parsing(names):
     name_list = []
     if len(names) == 1 and names[0][-4:] == '.txt': # labels file
         if os.path.exists(names[0]):
-            label_file = open(names, 'r')
+            label_file = open(names[0], 'r')
             while True:
                 line = label_file.readline()                
                 if not line: break
-                line = list(line.strip().split())
-                name_list = name_list + line
+                name_list.append(line)
             label_file.close()
         else:
             print('Error: No labels file directories')
