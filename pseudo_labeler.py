@@ -37,7 +37,7 @@ def name_parsing(names):
     name_list = []
     if len(names) == 1 and names[0][-4:] == '.txt': # labels file
         if os.path.exists(names[0]):
-            label_file = open(names, 'r')
+            label_file = open(names[0], 'r')
             while True:
                 line = label_file.readline()                
                 if not line: break
