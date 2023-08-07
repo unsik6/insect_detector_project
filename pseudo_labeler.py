@@ -133,6 +133,7 @@ def main(pars):
     else:
         for name in name_list:
             images_path = 'images\\' + name
+            images_path = images_path.replace(' ', '_')
             pseudo_labeling(images_path, pars.labeler, pars.conf, name, label_index)
             label_index += 1
     return 0

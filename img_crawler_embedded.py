@@ -143,6 +143,7 @@ def send_request(img_src, folder_name, name, cnt):
 def crawling(name : str, keywords : list, max_cnt : int = 100):
     # Create folder to store images of the class.
     folder_name = current_parent_dir + '\\images\\' + name
+    folder_name = folder_name.replace(' ', '_')
     try:
         if not os.path.exists(folder_name):
             os.mkdir(folder_name)
