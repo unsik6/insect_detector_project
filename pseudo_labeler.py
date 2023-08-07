@@ -41,8 +41,7 @@ def name_parsing(names):
             while True:
                 line = label_file.readline()                
                 if not line: break
-                line = list(line.strip().split())
-                name_list = name_list + line
+                name_list.append(line)
             label_file.close()
         else:
             print('Error: No labels file directories.')
