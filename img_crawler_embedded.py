@@ -39,6 +39,7 @@ def parsing():
     parser = argparse.ArgumentParser()
     parser.add_argument('--labels', nargs='+', type=str, help='class names')
     parser.add_argument('--num', type=int, help='the maximum number of collected image of each label')
+    parser.add_argument('--keywords', nargs='+', type=str, help='keywords combined with class name; "class name + keyword" will be searched.')
     pars = parser.parse_args()
     print(vars(pars))
     return pars
@@ -71,15 +72,17 @@ def name_parsing(names):
 ### Check keywords input file ###
 #################################
 # If there is no input file, then create the default keywords input files.
-def createWordsFile(names : list):
+def createWordsFile(names : list, keywords : list):
     for name in names:
         file_name = current_parent_dir + '\\search_words\\' + name + '.txt'
         try:
             if not os.path.exists(file_name):
                 file = open(file_name, 'w')
-                file.write(name + ' 해충\t')
-                file.write(name + ' 곤충\t')
-                file.write(name + '\t')
+                if keywords == None:
+                    file.write(name)
+                else:
+                    for keywords in keywords:
+                        file.write(name + ' ' + keywords, '\t')
                 file.close()
                 print('Create:' + file_name)
             else: print("Exception: There is same file :" + name)

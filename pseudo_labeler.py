@@ -8,6 +8,7 @@ def parsing():
     parser.add_argument('--images-path', type=str, help='image folders or file')
     parser.add_argument('--labeler', type=str, help='labeler file path; please input yolo parent dir')
     parser.add_argument('--labels', nargs='+', type=str, help='class names or txt file')
+    parser.add_argument('--keywords', nargs='+', type=str, help='keywords combined with class name; "class name + keyword" will be searched.')
     parser.add_argument('--index', type=int, default = 0, help='class index, start index if multiple class')
     parser.add_argument('--conf', type=float, default = 0.25, help='pseudo labeling cofidence treshold')
     parser.add_argument('--crawl', action='store_true', help='crwaling')
@@ -112,6 +113,10 @@ def main(pars):
         for names in name_list:
             cmd += ' ' + names
         cmd += ' --num ' + str(pars.num)
+        if pars.keywords != None:
+            cmd += ' --keywords'
+            for word in pars.keywords:
+                cmd += ' ' + word
         os.system(cmd) # call crawler
     
     # Pseudo Labeling using pre-trained yolov5 model
