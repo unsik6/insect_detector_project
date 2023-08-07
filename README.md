@@ -7,7 +7,7 @@
   - \<preparing\> 1) get the input file for classes. 2) create or get the input files as diverse extensions.
 
 ## [ 02 ] <a href = "https://github.com/unsik6/insect_detector_project/blob/main/pseudo_labeler.py">Pseudo-Labeler</a>
-&nbsp;&nbsp;Pseudo-labeler is labeling the raw images using pre-trained yolov5 model. This pseudo-labeler make the working time more less. You can specify whether the keywords given by argument is crawled by crawler. And, run <i>detect.py</i> of pre-trained yolov5 (also given by argument) with source images, which crawled by embedded-crawler or just given.
+&nbsp;&nbsp;Pseudo-labeler is labeling the raw images using pre-trained yolov5 model. This model is pre-trained using <a href = "https://www.kaggle.com/datasets/vencerlanz09/insect-village-synthetic-dataset">Insect Village Synthetic Dataset of MARIONETTE 👺</a>. This pseudo-labeler make the working time more less. You can specify whether the keywords given by argument is crawled by crawler. And, run <i>detect.py</i> of pre-trained yolov5 (also given by argument) with source images, which crawled by embedded-crawler or just given.
 
 ```bash
 python psedo_labeler.py --images-path [images path] --labeler [yolov5 parent dir] --labels [names of labels] --index [starte index] --conf [confidence threshold] --num [maximum number of crawling each images] (--crawl)
@@ -37,3 +37,8 @@ python psedo_labeler.py --images-path [images path] --labeler [yolov5 parent dir
 	&nbsp;&nbsp;Crawling option; If on, <i>img_crawler_embedded.py</i> is run using all given labels.
 </div>
 </details>
+
+<br/>
+
+## [ 03 ] <a href = "https://github.com/unsik6/insect_detector_project/blob/main/wiki_searcher.py">Wiki-Searcher</a>
+&nbsp;&nbsp;This wiki data searcher is searching input keywords in <i>Namu-wiki</i> Dump DB. This wiki site is in korean. The base DB is <a href = "https://huggingface.co/datasets/heegyu/namuwiki">namu wiki raw dataset<a> and <a href = "https://huggingface.co/datasets/heegyu/namuwiki-extracted">namu wiki extracted dataset</a> in <i>Hugging Face</i> served by <a href = "https://huggingface.co/heegyu"><i>heegyu</i></a>. The latter is parsed to remove HTML and Markdown elements by <i>heegyu</i>, allowing you to see the data intuitively. But, some data are missing from raw data.
