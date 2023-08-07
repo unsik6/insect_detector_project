@@ -20,13 +20,16 @@ def parsing():
     if not pars.crawl:
         if pars.images_path == None  or not os.path.exists(change_path(pars.images_path)):
             print('Error: There is no image source.')
-            exit(0)
+            exit(1)
         if len(pars.labels) != 1:
             print('Error: Only one label is allowed without crawling.')
-            exit(0)
+            exit(1)
+    if pars.labels == None:
+        print('Error: There is no label.')
+        exit(1)
     if pars.labeler == None or not os.path.exists(change_path(pars.labeler)):
         print('Error: There is no labeler')
-        exit(0)
+        exit(1)
     return pars
 
 # check keywords from arguements
