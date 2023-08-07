@@ -53,7 +53,7 @@ def name_parsing(names):
             while True:
                 line = label_file.readline()                
                 if not line: break
-                name_list.append(line)
+                name_list.append(line.strip())
             label_file.close()
         else:
             print('Error: No labels file directories')
@@ -261,7 +261,7 @@ def crawling(name : str, keywords : list, max_cnt : int = 100):
                     print('Current image and its source is stored successfully..')
                     cnt += 1
                 except OSError:
-                    print("Error: Failed to store the src list file :" + name)
+                    print("Error: Failed to store the src list file : " + name)
             else:
                 fail_cnt += 1
                 print("Storing is failed.")

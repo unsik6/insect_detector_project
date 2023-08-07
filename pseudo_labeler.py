@@ -41,7 +41,7 @@ def name_parsing(names):
             while True:
                 line = label_file.readline()                
                 if not line: break
-                name_list.append(line)
+                name_list.append(line.strip())
             label_file.close()
             global isLabel_Txt
             isLabel_Txt = True
