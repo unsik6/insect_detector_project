@@ -70,7 +70,7 @@ def pseudo_labeling(images_path, labeler_path, conf, label, index):
     detect_path = labeler_path + '/detect.py'
     weight_path = labeler_path + '/runs/train/pseudo_labeler/weights/best.pt'
     cmd = 'python ' + detect_path + ' --weights ' + weight_path + ' --conf '
-    cmd = cmd + str(conf) + ' --name pseudo_labeling --save-tx --source '
+    cmd = cmd + str(conf) + ' --name pseudo_labeling --save-txt --source '
     cmd = cmd + str(images_path)
     os.system(cmd)
     
