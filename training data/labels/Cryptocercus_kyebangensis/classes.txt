@@ -1,0 +1,28 @@
+Scutigeridae
+Lasioderma serricorne
+Blattella germanica
+Periplaneta americana
+Asiablatta kyotensis
+Periplaneta fuliginosa
+Cryptocercus kyebangensis
+Periplaneta australasiae
+Gromphadorhina portentosa
+Periplaneta japonica
+Shelfordella lateralis
+Blaptica dubia
+Psychoda alternata
+Scathophaga stercoraria
+Gasterophilus
+Oestridae
+Glossina
+Drosophilidae
+Lycoriella mali
+Asilidae
+Bradysia agrestis
+Musca domestica
+Lucilia caesar
+Drosophila melanogaster
+Dermatobia hominis
+Bibio tenebrosus
+Plecia longiforceps
+Penthetria japonica
