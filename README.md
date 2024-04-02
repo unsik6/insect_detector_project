@@ -38,6 +38,36 @@ python psedo_labeler.py --images-path [images path] --labeler [yolov5 parent dir
 </div>
 </details>
 
+## [ 03 ] <a href = "https://github.com/unsik6/insect_detector_project/tree/main/Dataset">Dataset</a>
+&nbsp;&nbsp;The dataset in this repository consists of total 2456 labeled images of 20 insects. Because the goal of this project is detecting pests, we choose them accordingly. Note that "Drosophila melanogaster"(No.9) belongs to "Drosophilidae"(No.10).
+
+&nbsp;&nbsp;The insects data is collected using scientific name of each insect as keyword for avoiding confusing. **Sadly, the balance of the number of data and the uniformity of the scale or size of images is not good, because there are a few data for some insects.** Thus, I recommand preprocessing handling the number of data and scaling images such as data augmentation.
+
+&nbsp;&nbsp;Because I labeled all data alone, I gave up to construct full dataset. **Note that the lexicographical order to insect name does not equal to label number. And, the label number is not continuous number and zero-based. So, as you already know, you must handle the label numbers before using this data.** (Initially, I composed this dataset with 27 insects and sorted them by species, which led to this issue.)
+
+|No|Scientific name|English name|Korean name|Label|Number of data|
+|---|---|---|---|---|---|
+|1|Asiablatta kyotensis|Asian wood roach|경도바퀴|4|55|
+|2|Asilidae|Bee killer, Robber fly|파리매|19|373|
+|3|Bibio tenebrosus|Bibio tenebrosus|검털파리|25|116|
+|4|Blaptica dubia|Dubia roach, Orange spotted roach, Guyana spotted roach, Argentinian wood roach|두비아바퀴벌레|11|204|
+|5|Blattella germanica|German cockroach|독일바퀴|2|148|
+|6|Bradysia agrestis|Bradysia agrestis|작은뿌리파리|20|11|
+|7|Cryptocercus kyebangensis|Wood roach|갑옷바퀴|6|23|
+|8|Dermatobia hominis|Human botfly|사람피부파리|24|14|
+|9|Drosophila melanogaster|Common fruit fly|노랑초파리|23|87|
+|10|Drosophilidae|Fruit fly, vinegar fly, pomace fly|초파리|17|105|
+|11|Gasterophilus|Moth fly, drain fly|나방파리|14|21|
+|12|Glossina|Tsetse botfly|체체파리|16|69|
+|13|Gromphadorhina portentosa|Madagascar hissing cockroach|마다가스카르휘파람바퀴|8|320|
+|14|Lasioderma serricorne|Cigar beetle, Cigarette beetle, Tobacco beetle|권연벌레|1|142|
+|15|Lucilia caesar|Common greenbottle|금파리|22|316|
+|16|Lycoriella mali|Lycoriella mali|긴수염버섯파리|18|13|
+|17|Musca domestica|Housefly|집파리|21|235|
+|18|Oestridae|Botfly, Warble fly, Heel fly, Gadfly|쇠파리|15|109|
+|19|Penthetria japonica|Plecia nearctica|계피우단털파리|27|59|
+|20|Periplaneta americana|American cockroach|이질바퀴|3|35|
+
 <br/>
 
 ## [ 03 ] <a href = "https://github.com/unsik6/insect_detector_project/blob/main/wiki_searcher.py">Wiki-Searcher</a>
