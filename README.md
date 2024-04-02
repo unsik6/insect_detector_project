@@ -6,6 +6,8 @@
 &nbsp;&nbsp;Image crawler is based on <a href = "https://www.selenium.dev/"><i>selenium</i></a> and <i>Google Chrome Driver</i>. By compatibility, the version of own chrome has to be 113.-. If there is no input files for keywords this crawler searchs for keywords in input files, else creates default input keywords files and searchs for default keywords.
   - \<preparing\> 1) get the input file for classes. 2) create or get the input files as diverse extensions.
 
+<br/>
+
 ## [ 02 ] <a href = "https://github.com/unsik6/insect_detector_project/blob/main/pseudo_labeler.py">Pseudo-Labeler</a>
 &nbsp;&nbsp;Pseudo-labeler is labeling the raw images using pre-trained yolov5 model. This model is pre-trained using <a href = "https://www.kaggle.com/datasets/vencerlanz09/insect-village-synthetic-dataset">Insect Village Synthetic Dataset of MARIONETTE 👺</a>. This pseudo-labeler make the working time more less. You can specify whether the keywords given by argument is crawled by crawler. And, run <i>detect.py</i> of pre-trained yolov5 (also given by argument) with source images, which crawled by embedded-crawler or just given.
 
@@ -38,7 +40,14 @@ python psedo_labeler.py --images-path [images path] --labeler [yolov5 parent dir
 </div>
 </details>
 
-## [ 03 ] <a href = "https://github.com/unsik6/insect_detector_project/tree/main/Dataset">Dataset</a>
+<br/>
+
+## [ 03 ] <a href = "https://github.com/unsik6/insect_detector_project/blob/main/wiki_searcher.py">Wiki-Searcher</a>
+&nbsp;&nbsp;This wiki data searcher is searching input keywords in <i>Namu-wiki</i> Dump DB. This wiki site is in korean. The base DB is <a href = "https://huggingface.co/datasets/heegyu/namuwiki">namu wiki raw dataset<a> and <a href = "https://huggingface.co/datasets/heegyu/namuwiki-extracted">namu wiki extracted dataset</a> in <i>Hugging Face</i> served by <a href = "https://huggingface.co/heegyu"><i>heegyu</i></a>. The latter is parsed to remove HTML and Markdown elements by <i>heegyu</i>, allowing you to see the data intuitively. But, some data are missing from raw data.
+
+<br/>
+
+## [ 04 ] <a href = "https://github.com/unsik6/insect_detector_project/tree/main/Dataset">Dataset</a>
 &nbsp;&nbsp;The dataset in this repository consists of total 2456 labeled images of 20 insects. Because the goal of this project is detecting pests, we choose them accordingly. Note that "Drosophila melanogaster"(No.9) belongs to "Drosophilidae"(No.10).
 
 &nbsp;&nbsp;The insects data is collected using scientific name of each insect as keyword for avoiding confusing. **Sadly, the balance of the number of data and the uniformity of the scale or size of images is not good, because there are a few data for some insects.** Thus, I recommand preprocessing handling the number of data and scaling images such as data augmentation.
@@ -67,8 +76,3 @@ python psedo_labeler.py --images-path [images path] --labeler [yolov5 parent dir
 |18|Oestridae|Botfly, Warble fly, Heel fly, Gadfly|쇠파리|15|109|
 |19|Penthetria japonica|Plecia nearctica|계피우단털파리|27|59|
 |20|Periplaneta americana|American cockroach|이질바퀴|3|35|
-
-<br/>
-
-## [ 03 ] <a href = "https://github.com/unsik6/insect_detector_project/blob/main/wiki_searcher.py">Wiki-Searcher</a>
-&nbsp;&nbsp;This wiki data searcher is searching input keywords in <i>Namu-wiki</i> Dump DB. This wiki site is in korean. The base DB is <a href = "https://huggingface.co/datasets/heegyu/namuwiki">namu wiki raw dataset<a> and <a href = "https://huggingface.co/datasets/heegyu/namuwiki-extracted">namu wiki extracted dataset</a> in <i>Hugging Face</i> served by <a href = "https://huggingface.co/heegyu"><i>heegyu</i></a>. The latter is parsed to remove HTML and Markdown elements by <i>heegyu</i>, allowing you to see the data intuitively. But, some data are missing from raw data.
