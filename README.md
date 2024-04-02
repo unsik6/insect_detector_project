@@ -48,7 +48,7 @@ python psedo_labeler.py --images-path [images path] --labeler [yolov5 parent dir
 <br/>
 
 ## [ 04 ] <a href = "https://github.com/unsik6/insect_detector_project/tree/main/Dataset">Dataset</a>
-&nbsp;&nbsp;The dataset in this repository consists of total 2456 labeled images of 20 insects. Because the goal of this project is detecting pests, we choose them accordingly. Note that "Drosophila melanogaster"(No.9) belongs to "Drosophilidae"(No.10).
+&nbsp;&nbsp;The dataset in this repository consists of total 2456 imagesof 20 insects labeld for YOLO. Because the goal of this project is detecting pests, we choose them accordingly. Note that "Drosophila melanogaster"(No.9) belongs to "Drosophilidae"(No.10).
 
 &nbsp;&nbsp;The insects data is collected using scientific name of each insect as keyword for avoiding confusing. **Sadly, the balance of the number of data and the uniformity of the scale or size of images is not good, because there are a few data for some insects.** Thus, I recommand preprocessing handling the number of data and scaling images such as data augmentation.
 
